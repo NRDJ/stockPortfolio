@@ -41,16 +41,11 @@ var updatePortfolioValueAndProfit = function () {
     $('#portfolioProfit').html(portfolioUnrealizedProfit);
   }
   
-  $(document).ready(function () {
+$(document).ready(function () {
     updatePortfolioValueAndProfit();
 
     $('.btn.remove').on('click', function (event) {
-
         $(this).closest('tr').remove();
-    
-        // $(this).parent().parent().remove();
-    
-        // The above also works
-    
-      });
-  });
+        updatePortfolioValueAndProfit();
+    });
+});
