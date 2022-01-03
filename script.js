@@ -21,9 +21,26 @@ var updateMarketValue = function (ele) {
     return unrealizedProfit;
   }
   
-  $(document).ready(function () {
+var sum = function (acc, x) { return acc + x; };
+
+var updatePortfolioValueAndProfit = function () {
+    var stocksMarketValues = [];
+    var stocksUnrealizedProfits = [];
+  
     $('tbody tr').each(function (i, ele) {
       var marketValue = updateMarketValue(ele);
-      updateUnrealizedProfit(ele, marketValue);
+      stocksMarketValues.push(marketValue);
+      var unrealizedProfit = updateUnrealizedProfit(ele, marketValue);
+      stocksUnrealizedProfits.push(unrealizedProfit);
     });
+  
+    var portfolioMarketValue = stocksMarketValues.reduce(sum);
+    var portfolioUnrealizedProfit = stocksUnrealizedProfits.reduce(sum);
+    
+    $('#portfolioValue').html(portfolioMarketValue);
+    $('#portfolioProfit').html(portfolioUnrealizedProfit);
+  }
+  
+  $(document).ready(function () {
+    updatePortfolioValueAndProfit();
   });
