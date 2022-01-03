@@ -36,11 +36,21 @@ var updatePortfolioValueAndProfit = function () {
   
     var portfolioMarketValue = stocksMarketValues.reduce(sum);
     var portfolioUnrealizedProfit = stocksUnrealizedProfits.reduce(sum);
-    
+
     $('#portfolioValue').html(portfolioMarketValue);
     $('#portfolioProfit').html(portfolioUnrealizedProfit);
   }
   
   $(document).ready(function () {
     updatePortfolioValueAndProfit();
+
+    $('.btn.remove').on('click', function (event) {
+
+        $(this).closest('tr').remove();
+    
+        // $(this).parent().parent().remove();
+    
+        // The above also works
+    
+      });
   });
